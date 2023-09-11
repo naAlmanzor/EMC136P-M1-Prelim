@@ -80,6 +80,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypointSize: 1
   waypointList: []
+  isLooping: 1
+  isReverse: 0
 --- !u!58 &4904153237051207429
 CircleCollider2D:
   m_ObjectHideFlags: 0

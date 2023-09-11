@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour
@@ -14,8 +15,13 @@ public class PlayerController : MonoBehaviour
 
     private Tilemap hideables;
 
-    private bool isHiding;
+    private bool isHiding, canHide;
     private Vector2 lastPosition;
+
+    private Vector3Int lastTintedTilePosition;
+    private Color defaultTileColor = Color.white;
+    private List<Vector3Int> lastTintedTiles = new List<Vector3Int>();
+    float horizontalMovement, verticalMovement;
 
     private void Start()
     {
@@ -40,13 +46,17 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         HandleAnims();
+        TintClosestTileWhite();
 
         // Check for 'E' key press
-        if (Input.GetKeyDown(KeyCode.E) && !isHiding)
+        if (Input.GetKeyDown(KeyCode.E) && !isHiding && canHide)
         {
             rb.velocity = Vector2.zero;
             collider.isTrigger = true;
             isHiding = true;
+
+            horizontalMovement = 0;
+            verticalMovement = 0;
 
             GetComponent<SpriteRenderer>().enabled = false;
 
@@ -72,8 +82,12 @@ public class PlayerController : MonoBehaviour
         }
 
         // Get the horizontal and vertical input (from keyboard or controller)
-        float horizontalMovement = Input.GetAxis("Horizontal");
-        float verticalMovement = Input.GetAxis("Vertical");
+        if(!isHiding)
+        {
+            horizontalMovement = Input.GetAxis("Horizontal");
+            verticalMovement = Input.GetAxis("Vertical");
+            // moveDirection = new Vector2(horizontalMovement, verticalMovement).normalized;
+        }
 
         moveDirection = new Vector2(horizontalMovement, verticalMovement).normalized;
     }
@@ -140,13 +154,94 @@ public class PlayerController : MonoBehaviour
                 {
                     // Assuming all tiles in this Tilemap are interactable.
                     // If you have specific criteria, add checks here.
+                    canHide = true;
                     return playerCellPosition + offset;
+                }
+                else
+                {
+                    canHide = false;
                 }
             }
         }
 
         // If no interactable tile is found nearby, return the player's position.
         return playerCellPosition;
+    }
+
+    private void TintClosestTileWhite()
+    {
+        // Reset the last tinted tiles' color back to default
+        if (lastTintedTiles.Count > 0)
+        {
+            foreach (Vector3Int tilePos in lastTintedTiles)
+            {
+                SetTileColor(tilePos, defaultTileColor);
+            }
+        }
+
+        Vector3Int closestTileCellPosition = GetClosestInteractableTilePosition();
+
+        // Get all tiles to tint (central tile and its adjacent tiles)
+        List<Vector3Int> tilesToTint = GetAdjacentTiles(closestTileCellPosition, 2);
+
+        // Tint all the tiles in the list
+        foreach (Vector3Int tilePos in tilesToTint)
+        {
+            SetTileColor(tilePos, Color.yellow);
+        }
+
+        lastTintedTiles = tilesToTint; // Store the last tinted positions
+    }
+
+    private List<Vector3Int> GetAdjacentTiles(Vector3Int centerTile, int depth = 1)
+    {
+        List<Vector3Int> tiles = new List<Vector3Int>();
+
+        for (int d = 1; d <= depth; d++)
+        {
+            for (int x = -d; x <= d; x++)
+            {
+                for (int y = -d; y <= d; y++)
+                {
+                    Vector3Int position = centerTile + new Vector3Int(x, y, 0);
+                    if (!tiles.Contains(position) && IsTileInteractable(position))
+                    {
+                        tiles.Add(position);
+                    }
+                }
+            }
+        }
+
+        return tiles;
+    }
+
+    private void SetTileColor(Vector3Int position, Color color)
+    {
+        hideables.SetTileFlags(position, TileFlags.None); // Remove flags so you can change the tile color
+        hideables.SetColor(position, color);
+    }
+
+    private bool IsTileInteractable(Vector3Int position)
+    {
+        // Assuming any non-null tile in the hideables tilemap is interactable.
+        // If you have specific criteria for interactivity, modify this logic accordingly.
+        return hideables.GetTile(position) != null;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(other.transform.CompareTag("Gem"))
+        {
+            Destroy(other.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.tag == "Finish")
+        {
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            int nextSceneIndex = (currentSceneIndex + 1) % SceneManager.sceneCountInBuildSettings; // This will loop back to the first scene if we're at the last one
+            SceneManager.LoadScene(nextSceneIndex);
+        }
     }
 
 }
