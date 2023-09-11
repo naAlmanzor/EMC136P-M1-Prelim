@@ -50,7 +50,7 @@ public class PatrolPoints : MonoBehaviour
     {
         if(transform.childCount > 1)
         {
-            Destroy(transform.GetChild(transform.childCount - 1).gameObject);
+            DestroyImmediate(transform.GetChild(transform.childCount - 1).gameObject);
         }
         else Debug.Log("Can't destroy starting position");
         
@@ -61,24 +61,26 @@ public class PatrolPoints : MonoBehaviour
 [CustomEditor(typeof(PatrolPoints))]
 public class WaypointsListEditor : Editor
 {
-    int i;
-
     public override void OnInspectorGUI()
     {
         var thisTarget = (PatrolPoints)target;
-        if(thisTarget == null) return;
+
+        if (thisTarget == null) return;
 
         DrawDefaultInspector();
 
-        i = 0;
-        if(GUILayout.Button("Add All Nodes")){
-            thisTarget.waypointList = new GameObject[thisTarget.transform.childCount];
+        // Button for creating a new waypoint
+        if (GUILayout.Button("Create New Waypoint"))
+        {
+            GameObject waypoint = new GameObject("Waypoint " + (thisTarget.transform.childCount + 1));
+            waypoint.transform.parent = thisTarget.transform;
+            waypoint.transform.position = Vector3.zero; // Or provide some other default position
+        }
 
-            foreach(Transform child in thisTarget.transform)
-            {
-              thisTarget.waypointList[i++] = child.gameObject;
-            }
-            
+        // Button for removing the last waypoint
+        if (GUILayout.Button("Remove Last Waypoint"))
+        {
+            thisTarget.RemoveLastWaypoint();
         }
     }
 }
