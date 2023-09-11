@@ -32,6 +32,11 @@ public class PlayerController : MonoBehaviour
         // }
     }
 
+    public bool IsHiding()
+    {
+        return isHiding;
+    }
+
     private void Update()
     {
         HandleAnims();
