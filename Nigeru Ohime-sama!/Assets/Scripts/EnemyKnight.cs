@@ -168,7 +168,10 @@ public class EnemyKnight : MonoBehaviour
     {
         isWaiting = true;
         yield return new WaitForSeconds(1); // Pause for 2 seconds
-        AudioManager.instance.Play("Alert");
+        if(!AudioManager.instance.IsPlaying("Alert"))
+        {
+            AudioManager.instance.Play("Alert");
+        }
         isWaiting = false;
 
         if(patrolPoints.GetComponent<Collider2D>().bounds.Contains(playerTransform.position))

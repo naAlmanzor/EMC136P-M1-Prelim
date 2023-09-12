@@ -274,6 +274,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.transform.CompareTag("Gem"))
         {
+            AudioManager.instance.Play("Collect");
             Destroy(other.gameObject);
         }
 
@@ -295,6 +296,7 @@ public class PlayerController : MonoBehaviour
         if(other.CompareTag("End"))
         {
             gameStats.state = "win";
+            AudioManager.instance.Stop("GameTheme");
             gameStats.playerStamina = 100;
             gameStats.playerHealth = 3;
             SceneManager.LoadScene("_GameState");

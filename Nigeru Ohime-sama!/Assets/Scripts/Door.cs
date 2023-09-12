@@ -16,7 +16,7 @@ public class Door : MonoBehaviour
             {
                 // Debug.Log("Gems");
                 this.gameObject.SetActive(false);
-                AudioManager.instance.Stop("GameTheme");
+                // AudioManager.instance.Stop("GameTheme");
                 goal.tag = "End";
             }
             else
