@@ -296,7 +296,7 @@ public class PlayerController : MonoBehaviour
         if(other.CompareTag("End"))
         {
             gameStats.state = "win";
-            AudioManager.instance.Stop("GameTheme");
+            // AudioManager.instance.Stop("GameTheme");
             gameStats.playerStamina = 100;
             gameStats.playerHealth = 3;
             SceneManager.LoadScene("_GameState");
