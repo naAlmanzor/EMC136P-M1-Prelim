@@ -6,6 +6,7 @@ public class GameStats : ScriptableObject
     public int playerHealth = 3;
     public string objective = "Find the Gem";
     public float playerStamina = 100;
+    public string state = "win";
 
     // You can add other game-related statistics here
 }

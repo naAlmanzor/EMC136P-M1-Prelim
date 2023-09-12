@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad0861ff73b4e55478e411835b8044e5, type: 3}
   m_Name: GameStats
   m_EditorClassIdentifier: 
-  playerHealth: 3
-  objective: Find Gem
+  playerHealth: 1
+  objective: Find the Gem
   playerStamina: 100
+  state: win

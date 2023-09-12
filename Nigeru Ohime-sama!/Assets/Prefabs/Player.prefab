@@ -123,6 +123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  sprintMultiplier: 1
+  gameStats: {fileID: 11400000, guid: 2ea10211aac40e84ebe51af556990b71, type: 2}
 --- !u!50 &1520026676111990019
 Rigidbody2D:
   serializedVersion: 4
@@ -159,7 +161,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 7295837105568576612}
   m_Enabled: 0
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: d0cef322917607c4b93502b40bd9a695, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

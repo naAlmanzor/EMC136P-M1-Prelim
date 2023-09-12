@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Interactable
   - Gem
+  - End
   layers:
   - Default
   - TransparentFX

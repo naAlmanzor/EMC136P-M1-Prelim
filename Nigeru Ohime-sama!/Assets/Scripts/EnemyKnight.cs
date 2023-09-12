@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyKnight : MonoBehaviour
 {
@@ -35,6 +36,8 @@ public class EnemyKnight : MonoBehaviour
 
     [Header("SphereCast Direction")]
     public bool castHorizontally = true;
+
+    [SerializeField] private GameStats gameStats;
 
 
 
@@ -223,6 +226,15 @@ public class EnemyKnight : MonoBehaviour
     private void HandleAnims()
     {
         anims.SetBool("isMoving", !isWaiting);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(other.transform.CompareTag("Player"))
+        {
+            gameStats.playerStamina = 100;
+            gameStats.playerHealth -= 1;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }
 

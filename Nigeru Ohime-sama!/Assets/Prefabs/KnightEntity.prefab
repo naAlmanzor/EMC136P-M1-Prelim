@@ -123,6 +123,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   patrolPoints: {fileID: 0}
+  sphereRadius: 1
+  sphereCastDistance: 5
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  castHorizontally: 1
+  gameStats: {fileID: 11400000, guid: 2ea10211aac40e84ebe51af556990b71, type: 2}
 --- !u!50 &4411333073740012451
 Rigidbody2D:
   serializedVersion: 4

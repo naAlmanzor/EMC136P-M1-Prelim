@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -622,6 +622,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5713863351539343660}
+  - component: {fileID: 4387485445886260620}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -646,6 +647,25 @@ Transform:
   - {fileID: 890700158768323121}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4387485445886260620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2340681109809370237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: debc189886488de46bf3ed419c8f0547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameStats: {fileID: 11400000, guid: 2ea10211aac40e84ebe51af556990b71, type: 2}
+  hearts:
+  - {fileID: 5983276134999730365}
+  - {fileID: 4714437955586773641}
+  - {fileID: 1213096856526402782}
+  stamina: {fileID: 2943987419224494473}
+  objText: {fileID: 3395075432247041428}
 --- !u!1 &2982435480491727969
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,11 +865,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 2379301b8a7d1834fb4cb54d15f06c7b, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0

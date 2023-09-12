@@ -7,6 +7,8 @@ using UnityEngine.Tilemaps;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5.0f; // Movement speed of the player
+    public float sprintMultiplier = 1f;
+    private float sprintValue = 1f;
     private Vector2 moveDirection = Vector2.zero;
 
     private Rigidbody2D rb; // Reference to Rigidbody2D component
@@ -15,13 +17,15 @@ public class PlayerController : MonoBehaviour
 
     private Tilemap hideables;
 
-    private bool isHiding, canHide;
+    private bool isHiding, canHide, canSprint;
     private Vector2 lastPosition;
 
     private Vector3Int lastTintedTilePosition;
     private Color defaultTileColor = Color.white;
     private List<Vector3Int> lastTintedTiles = new List<Vector3Int>();
-    float horizontalMovement, verticalMovement;
+    private float horizontalMovement, verticalMovement;
+
+    [SerializeField] private GameStats gameStats;
 
     private void Start()
     {
@@ -81,6 +85,40 @@ public class PlayerController : MonoBehaviour
             rb.velocity = Vector2.zero;
         }
 
+        if(gameStats.playerStamina >= 40)
+        {
+            canSprint = true;
+        }
+
+        if(gameStats.playerStamina <= 0) {
+            canSprint = false;
+        }
+
+        if(Input.GetKey(KeyCode.LeftShift) && gameStats.playerStamina > 0f && canSprint)
+        {
+            sprintValue = sprintMultiplier;
+            gameStats.playerStamina -= 0.1f;
+
+            // Ensure stamina doesn't go below 0
+            if (gameStats.playerStamina < 0f)
+            {
+                gameStats.playerStamina = 0f;
+            }
+        }
+        else
+        {
+            sprintValue = 1;
+
+            // Regenerate stamina
+            gameStats.playerStamina += 0.1f;
+
+            // Ensure stamina doesn't exceed 100
+            if(gameStats.playerStamina > 100f)
+            {
+                gameStats.playerStamina = 100f;
+            }
+        }
+
         // Get the horizontal and vertical input (from keyboard or controller)
         if(!isHiding)
         {
@@ -95,7 +133,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         // Move the player
-        rb.velocity = moveDirection * moveSpeed;
+        rb.velocity = moveDirection * moveSpeed * sprintValue;
         // rb.AddForce(moveDirection * moveSpeed);
     }
 
@@ -236,8 +274,17 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.tag == "Finish")
+        if(other.CompareTag("Finish"))
         {
+            gameStats.playerStamina = 100;
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            int nextSceneIndex = (currentSceneIndex + 1) % SceneManager.sceneCountInBuildSettings; // This will loop back to the first scene if we're at the last one
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+
+        if(other.CompareTag("End"))
+        {
+            gameStats.state = "win";
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             int nextSceneIndex = (currentSceneIndex + 1) % SceneManager.sceneCountInBuildSettings; // This will loop back to the first scene if we're at the last one
             SceneManager.LoadScene(nextSceneIndex);
