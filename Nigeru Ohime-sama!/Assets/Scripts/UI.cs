@@ -54,7 +54,7 @@ public class UI : MonoBehaviour
                 // {
                 //     AudioManager.instance.Stop("Hit");
                 // }
-
+                AudioManager.instance.Stop("GameTheme");
                 AudioManager.instance.Play("Lose");
                 gameStats.state = "lose";
                 gameStats.playerStamina = 100;
