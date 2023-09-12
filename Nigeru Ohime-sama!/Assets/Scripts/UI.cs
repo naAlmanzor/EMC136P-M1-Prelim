@@ -50,6 +50,8 @@ public class UI : MonoBehaviour
                 hearts[1].SetActive(false);
                 hearts[0].SetActive(false);
                 gameStats.state = "lose";
+                gameStats.playerStamina = 100;
+                gameStats.playerHealth = 3;
                 SceneManager.LoadScene(1);
                 break;
         }

@@ -285,9 +285,9 @@ public class PlayerController : MonoBehaviour
         if(other.CompareTag("End"))
         {
             gameStats.state = "win";
-            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            int nextSceneIndex = (currentSceneIndex + 1) % SceneManager.sceneCountInBuildSettings; // This will loop back to the first scene if we're at the last one
-            SceneManager.LoadScene(nextSceneIndex);
+            gameStats.playerStamina = 100;
+            gameStats.playerHealth = 3;
+            SceneManager.LoadScene("_GameState");
         }
     }
 
