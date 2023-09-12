@@ -40,6 +40,16 @@ public class PlayerController : MonoBehaviour
         // {
         //     Debug.Log("Tile Name: " + tile.name);
         // }
+        if(!AudioManager.instance.IsPlaying("GameTheme"))
+        {
+            AudioManager.instance.Play("GameTheme");
+        }
+
+        if(AudioManager.instance.IsPlaying("Lose"))
+        {
+            AudioManager.instance.Stop("Lose");
+        }
+        
     }
 
     public bool IsHiding()
@@ -55,6 +65,8 @@ public class PlayerController : MonoBehaviour
         // Check for 'E' key press
         if (Input.GetKeyDown(KeyCode.E) && !isHiding && canHide)
         {
+            AudioManager.instance.Play("Hide");
+
             rb.velocity = Vector2.zero;
             collider.isTrigger = true;
             isHiding = true;
@@ -74,6 +86,8 @@ public class PlayerController : MonoBehaviour
         }
         else if(Input.GetKeyDown(KeyCode.E) && isHiding)
         {
+            AudioManager.instance.Play("Unhide");
+        
             GetComponent<SpriteRenderer>().enabled = true;
             collider.isTrigger = false;
             isHiding = false;
@@ -124,7 +138,6 @@ public class PlayerController : MonoBehaviour
         {
             horizontalMovement = Input.GetAxis("Horizontal");
             verticalMovement = Input.GetAxis("Vertical");
-            // moveDirection = new Vector2(horizontalMovement, verticalMovement).normalized;
         }
 
         moveDirection = new Vector2(horizontalMovement, verticalMovement).normalized;
@@ -132,9 +145,7 @@ public class PlayerController : MonoBehaviour
     
     private void FixedUpdate()
     {
-        // Move the player
         rb.velocity = moveDirection * moveSpeed * sprintValue;
-        // rb.AddForce(moveDirection * moveSpeed);
     }
 
     private void HandleAnims()
@@ -179,8 +190,6 @@ public class PlayerController : MonoBehaviour
         // Convert player's world position to cell position
         Vector3Int playerCellPosition = hideables.WorldToCell(transform.position);
 
-        // Iterate through the surrounding tiles to find the closest interactable one.
-        // (This logic can be extended if you want to check more than just the direct neighbors.)
         int checkRadius = 1;
         for (int x = -checkRadius; x <= checkRadius; x++)
         {
@@ -190,8 +199,6 @@ public class PlayerController : MonoBehaviour
                 TileBase tile = hideables.GetTile(playerCellPosition + offset);
                 if (tile != null)
                 {
-                    // Assuming all tiles in this Tilemap are interactable.
-                    // If you have specific criteria, add checks here.
                     canHide = true;
                     return playerCellPosition + offset;
                 }
@@ -255,14 +262,12 @@ public class PlayerController : MonoBehaviour
 
     private void SetTileColor(Vector3Int position, Color color)
     {
-        hideables.SetTileFlags(position, TileFlags.None); // Remove flags so you can change the tile color
+        hideables.SetTileFlags(position, TileFlags.None);
         hideables.SetColor(position, color);
     }
 
     private bool IsTileInteractable(Vector3Int position)
     {
-        // Assuming any non-null tile in the hideables tilemap is interactable.
-        // If you have specific criteria for interactivity, modify this logic accordingly.
         return hideables.GetTile(position) != null;
     }
 
@@ -271,6 +276,11 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(other.gameObject);
         }
+
+        if(other.transform.CompareTag("Knight"))
+        {
+            AudioManager.instance.Play("Hit");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -278,7 +288,7 @@ public class PlayerController : MonoBehaviour
         {
             gameStats.playerStamina = 100;
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            int nextSceneIndex = (currentSceneIndex + 1) % SceneManager.sceneCountInBuildSettings; // This will loop back to the first scene if we're at the last one
+            int nextSceneIndex = (currentSceneIndex + 1) % SceneManager.sceneCountInBuildSettings;
             SceneManager.LoadScene(nextSceneIndex);
         }
 

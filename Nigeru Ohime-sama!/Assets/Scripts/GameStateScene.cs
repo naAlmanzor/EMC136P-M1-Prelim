@@ -11,6 +11,7 @@ public class GameStateScene : MonoBehaviour
     {
         if(gameStats.state == "lose")
         {
+            AudioManager.instance.Play("Lose");
             gameOver.SetActive(true);
             gameClear.SetActive(false);
         }

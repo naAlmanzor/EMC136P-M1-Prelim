@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    private void Start() {
+        if(AudioManager.instance.IsPlaying("GameTheme"))
+        {
+            AudioManager.instance.Stop("GameTheme");
+        }
+    }
     public void LoadLevel(string name)
     {
         SceneManager.LoadScene(name);

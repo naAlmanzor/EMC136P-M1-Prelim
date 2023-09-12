@@ -167,11 +167,10 @@ public class EnemyKnight : MonoBehaviour
     private IEnumerator AlertCoroutine()
     {
         isWaiting = true;
-        yield return new WaitForSeconds(2); // Pause for 2 seconds
+        yield return new WaitForSeconds(1); // Pause for 2 seconds
+        AudioManager.instance.Play("Alert");
         isWaiting = false;
 
-        // After waiting, check if the player is still inside the PatrolPoints collider.
-        // If yes, chase the player. Otherwise, return to patrolling.
         if(patrolPoints.GetComponent<Collider2D>().bounds.Contains(playerTransform.position))
         {
             Debug.Log("Chase");
@@ -203,7 +202,7 @@ public class EnemyKnight : MonoBehaviour
     private IEnumerator WaitAndProceed()
     {
         isWaiting = true;
-        yield return new WaitForSeconds(0.5f); // Wait for 2 seconds
+        yield return new WaitForSeconds(0.5f);
         Transform nextWaypoint = patrolPoints.GetNextWaypoint(currentWaypoint);
         currentWaypoint = nextWaypoint;
         isWaiting = false;
