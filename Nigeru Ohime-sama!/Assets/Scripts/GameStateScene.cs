@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameStateScene : MonoBehaviour
 {
@@ -11,7 +12,6 @@ public class GameStateScene : MonoBehaviour
     {
         if(gameStats.state == "lose")
         {
-            AudioManager.instance.Play("Lose");
             gameOver.SetActive(true);
             gameClear.SetActive(false);
         }
@@ -21,5 +21,10 @@ public class GameStateScene : MonoBehaviour
             gameOver.SetActive(false);
             gameClear.SetActive(true);
         }
+    }
+
+    public void LoadLevel(string name)
+    {
+        SceneManager.LoadScene(name);
     }
 }

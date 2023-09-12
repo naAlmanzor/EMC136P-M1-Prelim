@@ -50,12 +50,12 @@ public class UI : MonoBehaviour
                 hearts[1].SetActive(false);
                 hearts[0].SetActive(false);
 
-                if(AudioManager.instance.IsPlaying("Hit"))
-                {
-                    AudioManager.instance.Stop("Hit");
-                }
-                
-                // AudioManager.instance.Play("Lose");
+                // if(AudioManager.instance.IsPlaying("Hit"))
+                // {
+                //     AudioManager.instance.Stop("Hit");
+                // }
+
+                AudioManager.instance.Play("Lose");
                 gameStats.state = "lose";
                 gameStats.playerStamina = 100;
                 gameStats.playerHealth = 3;

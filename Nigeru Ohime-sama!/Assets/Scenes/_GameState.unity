@@ -549,8 +549,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1366256139}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+      - m_Target: {fileID: 1366256138}
+        m_TargetAssemblyTypeName: GameStateScene, Assembly-CSharp
         m_MethodName: LoadLevel
         m_Mode: 5
         m_Arguments:
@@ -834,7 +834,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1007,8 +1007,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1366256139}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+      - m_Target: {fileID: 1366256138}
+        m_TargetAssemblyTypeName: GameStateScene, Assembly-CSharp
         m_MethodName: LoadLevel
         m_Mode: 5
         m_Arguments:
@@ -1353,7 +1353,6 @@ GameObject:
   - component: {fileID: 1366256136}
   - component: {fileID: 1366256135}
   - component: {fileID: 1366256134}
-  - component: {fileID: 1366256139}
   - component: {fileID: 1366256138}
   m_Layer: 5
   m_Name: Canvas
@@ -1462,18 +1461,6 @@ MonoBehaviour:
   gameStats: {fileID: 11400000, guid: 2ea10211aac40e84ebe51af556990b71, type: 2}
   gameOver: {fileID: 1806567729}
   gameClear: {fileID: 1549449532}
---- !u!114 &1366256139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1366256133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70e5c3e0a87e2b54181f9a6db04735e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1422712861
 GameObject:
   m_ObjectHideFlags: 0
@@ -1654,9 +1641,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1549449532}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70e5c3e0a87e2b54181f9a6db04735e1, type: 3}
+  m_Script: {fileID: 11500000, guid: 09d969c4bf6664240af12b1c79eec9d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameStats: {fileID: 0}
+  gameOver: {fileID: 0}
+  gameClear: {fileID: 0}
 --- !u!1 &1671891342
 GameObject:
   m_ObjectHideFlags: 0
@@ -1889,7 +1879,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

@@ -10,6 +10,11 @@ public class MainMenu : MonoBehaviour
         {
             AudioManager.instance.Stop("GameTheme");
         }
+
+        if(AudioManager.instance.IsPlaying("Lose"))
+        {
+            AudioManager.instance.Stop("Lose");
+        }
     }
     public void LoadLevel(string name)
     {
