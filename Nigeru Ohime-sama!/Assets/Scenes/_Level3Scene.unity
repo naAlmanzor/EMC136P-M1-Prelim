@@ -145,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3988852840497753600, guid: b4741a3481e7c4c4e9c870b4b74c52b2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.24301592
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3988852840497753600, guid: b4741a3481e7c4c4e9c870b4b74c52b2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6065,7 +6065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3988852840497753600, guid: b4741a3481e7c4c4e9c870b4b74c52b2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.24301592
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3988852840497753600, guid: b4741a3481e7c4c4e9c870b4b74c52b2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9900,7 +9900,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &638672417
 Transform:
   m_ObjectHideFlags: 0
@@ -10029,7 +10029,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3988852840497753600, guid: b4741a3481e7c4c4e9c870b4b74c52b2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.24301592
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3988852840497753600, guid: b4741a3481e7c4c4e9c870b4b74c52b2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10615,7 +10615,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!60 &1359183690
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -10645,7 +10645,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -13955,6 +13955,7 @@ GameObject:
   - component: {fileID: 1573062246}
   - component: {fileID: 1573062251}
   - component: {fileID: 1573062250}
+  - component: {fileID: 1573062252}
   - component: {fileID: 1573062249}
   - component: {fileID: 1573062248}
   - component: {fileID: 1573062247}
@@ -13988,7 +13989,7 @@ CompositeCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1573062245}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -15050,6 +15051,19 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1573062252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573062245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a432afb87d20a0843a2bd398b2ca18c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goal: {fileID: 638672416}
 --- !u!1 &1675964585
 GameObject:
   m_ObjectHideFlags: 0
