@@ -55,6 +55,8 @@ public class EnemyKnight : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        PerformSphereCast();
+
         switch(state)
         {
             case State.Patrol:
@@ -68,7 +70,6 @@ public class EnemyKnight : MonoBehaviour
                 break;
         }
 
-        PerformSphereCast();
         HandleAnims();
         
         lastFramePosition = transform.position;  // Update the last frame position after all movement calculations
@@ -170,6 +171,7 @@ public class EnemyKnight : MonoBehaviour
         // If yes, chase the player. Otherwise, return to patrolling.
         if(patrolPoints.GetComponent<Collider2D>().bounds.Contains(playerTransform.position))
         {
+            Debug.Log("Chase");
             state = State.Chase;
         }
         else
